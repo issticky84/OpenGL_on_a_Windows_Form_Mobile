@@ -57,6 +57,10 @@ namespace OpenGLForm{
 			bool InitGL(GLvoid);
 			GLvoid ReSizeGLScene(GLsizei width, GLsizei height);
 			System::Void DrawRectWithOpenGL(RECTANGLE* pRect,vector<float>  draw_color);
+			System::Void DrawText_FTGL(int,int,int,float);
+			System::Void DrawTime_FTGL(int index,int x, int y);
+			System::Void DrawCircle(int,int,float,float,float,float);
+			System::Void time_string();
 			System::Void SwapOpenGLBuffers(System::Void);
 			System::Void wglmakecur();
 			double round(double);

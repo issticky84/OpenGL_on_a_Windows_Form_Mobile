@@ -46,6 +46,7 @@ namespace OpenGLForm{
 			vector<float> color;
 			color.resize(3);
 
+			/*
 			int y_position = 20;
 			if(!histogram_index.empty())
 			{
@@ -88,7 +89,7 @@ namespace OpenGLForm{
 					y_position += 50;
 				}
 			}
-
+			*/
 			SwapOpenGLBuffers();
 			
 	}
@@ -143,40 +144,40 @@ namespace OpenGLForm{
 		}		
 	}
 
-	System::Void RawDataVisualization::DrawTime_FTGL(int index,int x, int y)
-	{
-		int hour;
-		int five_minute_index;
-		for(int i=0;i<preprocessing_data.hour_range.size();i++)
-		{
-			if(index>=preprocessing_data.hour_range[i].x && index<= preprocessing_data.hour_range[i].y)
-			{
-				hour = preprocessing_data.hour_index[i];
-				if(hour == preprocessing_data.begin_hour && preprocessing_data.num_of_begin_hour<12)
-					five_minute_index = index - preprocessing_data.hour_range[i].x + (12-preprocessing_data.num_of_begin_hour);
-				else
-					five_minute_index = index - preprocessing_data.hour_range[i].x;
-				
-				break;
-			}
-		}
-		stringstream ss;
-		ss << hour;
-		string str = ss.str();
-		char *hour_text = (char*)str.c_str();		
+	//System::Void RawDataVisualization::DrawTime_FTGL(int index,int x, int y)
+	//{
+	//	int hour;
+	//	int five_minute_index;
+	//	for(int i=0;i<preprocessing_data.hour_range.size();i++)
+	//	{
+	//		if(index>=preprocessing_data.hour_range[i].x && index<= preprocessing_data.hour_range[i].y)
+	//		{
+	//			hour = preprocessing_data.hour_index[i];
+	//			if(hour == preprocessing_data.begin_hour && preprocessing_data.num_of_begin_hour<12)
+	//				five_minute_index = index - preprocessing_data.hour_range[i].x + (12-preprocessing_data.num_of_begin_hour);
+	//			else
+	//				five_minute_index = index - preprocessing_data.hour_range[i].x;
+	//			
+	//			break;
+	//		}
+	//	}
+	//	stringstream ss;
+	//	ss << hour;
+	//	string str = ss.str();
+	//	char *hour_text = (char*)str.c_str();		
 
-		strcat(hour_text,five_minutes[five_minute_index]);
+	//	strcat(hour_text,five_minutes[five_minute_index]);
 
-		glPushMatrix();
+	//	glPushMatrix();
 
-		float font_size = 10*(scale_factor[1]+0.3+scale_x[1]);
-		font.FaceSize(font_size);
-		glColor3f(1.0, 1.0, 1.0);
-		glRasterPos2f(x , y-20.0 + font.LineHeight());
-		font.Render(hour_text);
+	//	float font_size = 10*(scale_factor[1]+0.3+scale_x[1]);
+	//	font.FaceSize(font_size);
+	//	glColor3f(1.0, 1.0, 1.0);
+	//	glRasterPos2f(x , y-20.0 + font.LineHeight());
+	//	font.Render(hour_text);
 
-		glPopMatrix();		
-	}
+	//	glPopMatrix();		
+	//}
 
 	vector3 RawDataVisualization::Unprojection(vector2 _2Dpos){
 		float Depth;
@@ -251,21 +252,21 @@ namespace OpenGLForm{
 			}
 	}
 
-	System::Void RawDataVisualization::time_string()
-	{
-		strcpy(five_minutes[0],":00");
-		strcpy(five_minutes[1],":05");
-		strcpy(five_minutes[2],":10");
-		strcpy(five_minutes[3],":15");
-		strcpy(five_minutes[4],":20");
-		strcpy(five_minutes[5],":25");
-		strcpy(five_minutes[6],":30");
-		strcpy(five_minutes[7],":35");
-		strcpy(five_minutes[8],":40");
-		strcpy(five_minutes[9],":45");
-		strcpy(five_minutes[10],":50");
-		strcpy(five_minutes[11],":55");
-	}
+	//System::Void RawDataVisualization::time_string()
+	//{
+	//	strcpy(five_minutes[0],":00");
+	//	strcpy(five_minutes[1],":05");
+	//	strcpy(five_minutes[2],":10");
+	//	strcpy(five_minutes[3],":15");
+	//	strcpy(five_minutes[4],":20");
+	//	strcpy(five_minutes[5],":25");
+	//	strcpy(five_minutes[6],":30");
+	//	strcpy(five_minutes[7],":35");
+	//	strcpy(five_minutes[8],":40");
+	//	strcpy(five_minutes[9],":45");
+	//	strcpy(five_minutes[10],":50");
+	//	strcpy(five_minutes[11],":55");
+	//}
 
 	System::Void RawDataVisualization::clear()
 	{

@@ -36,7 +36,7 @@ namespace OpenGL_on_a_Windows_Form
 			//start_flag = false;
 
 			histogram = gcnew HistogramVisualization(this,this->panel3,panel3->Width,panel3->Height,read_csv,preprocessing_data);
-			rawData = gcnew RawDataVisualization(this,this->panel1,panel1->Width,panel1->Height,read_csv,preprocessing_data);
+			//rawData = gcnew RawDataVisualization(this,this->panel1,panel1->Width,panel1->Height,read_csv,preprocessing_data);
 			detail = gcnew DetailVisualization(this,this->panel2,panel2->Width,panel2->Height,read_csv,preprocessing_data);
 	
 			/*OpenGL = gcnew COpenGL(this,this->panel1,panel1->Width,panel1->Height,read_csv);
@@ -140,7 +140,7 @@ namespace OpenGL_on_a_Windows_Form
 			// 
 			this->panel1->Location = System::Drawing::Point(12, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1547, 259);
+			this->panel1->Size = System::Drawing::Size(1547, 27);
 			this->panel1->TabIndex = 0;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Form1::panel1_Paint);
 			this->panel1->MouseEnter += gcnew System::EventHandler(this, &Form1::panel1_MouseEnter);
@@ -148,18 +148,19 @@ namespace OpenGL_on_a_Windows_Form
 			// 
 			// panel2
 			// 
-			this->panel2->Location = System::Drawing::Point(671, 277);
+			this->panel2->Location = System::Drawing::Point(656, 92);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(888, 765);
+			this->panel2->Size = System::Drawing::Size(1020, 950);
 			this->panel2->TabIndex = 1;
+			this->panel2->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Form1::panel2_Paint);
 			this->panel2->MouseEnter += gcnew System::EventHandler(this, &Form1::panel2_MouseEnter);
 			this->panel2->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Form1::panel2_MouseMove);
 			// 
 			// panel3
 			// 
-			this->panel3->Location = System::Drawing::Point(12, 277);
+			this->panel3->Location = System::Drawing::Point(12, 92);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(653, 765);
+			this->panel3->Size = System::Drawing::Size(638, 950);
 			this->panel3->TabIndex = 2;
 			this->panel3->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Form1::panel3_Paint);
 			this->panel3->MouseEnter += gcnew System::EventHandler(this, &Form1::panel3_MouseEnter);
@@ -177,7 +178,7 @@ namespace OpenGL_on_a_Windows_Form
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(1565, 17);
+			this->button2->Location = System::Drawing::Point(1565, 7);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(63, 32);
 			this->button2->TabIndex = 5;
@@ -187,12 +188,12 @@ namespace OpenGL_on_a_Windows_Form
 			// 
 			// trackBar1
 			// 
+			this->trackBar1->LargeChange = 4;
 			this->trackBar1->Location = System::Drawing::Point(1682, 249);
 			this->trackBar1->Maximum = 100;
 			this->trackBar1->Name = L"trackBar1";
 			this->trackBar1->Size = System::Drawing::Size(196, 45);
 			this->trackBar1->SmallChange = 2;
-			this->trackBar1->LargeChange = 4;
 			this->trackBar1->TabIndex = 6;
 			this->trackBar1->TickFrequency = 4;
 			this->trackBar1->Value = 16;
@@ -200,7 +201,7 @@ namespace OpenGL_on_a_Windows_Form
 			// 
 			// Detail_Clear
 			// 
-			this->Detail_Clear->Location = System::Drawing::Point(1565, 317);
+			this->Detail_Clear->Location = System::Drawing::Point(1613, 50);
 			this->Detail_Clear->Name = L"Detail_Clear";
 			this->Detail_Clear->Size = System::Drawing::Size(63, 36);
 			this->Detail_Clear->TabIndex = 7;
@@ -219,8 +220,6 @@ namespace OpenGL_on_a_Windows_Form
 			// Gravity_Norm
 			// 
 			this->Gravity_Norm->AutoSize = true;
-			//this->Gravity_Norm->Checked = false;
-			//this->Gravity_Norm->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->Gravity_Norm->Location = System::Drawing::Point(1691, 61);
 			this->Gravity_Norm->Name = L"Gravity_Norm";
 			this->Gravity_Norm->Size = System::Drawing::Size(89, 16);
@@ -343,6 +342,7 @@ namespace OpenGL_on_a_Windows_Form
 			this->Controls->Add(this->panel1);
 			this->Name = L"Form1";
 			this->Text = L"OpenGL on a Windows Form using Managed C++";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Form1::Form1_MouseDown);
 			this->MouseEnter += gcnew System::EventHandler(this, &Form1::Form1_MouseEnter);
 			this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Form1::Form1_MouseMove_1);
@@ -642,6 +642,10 @@ namespace OpenGL_on_a_Windows_Form
 					backgroundWorker1->ReportProgress(i);
 				}    
 			 }
+private: System::Void panel2_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+		 }
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		 }
 };
 }
 

@@ -58,6 +58,8 @@ namespace OpenGLForm{
 			rtri = 0.0f;
 			rquad = 0.0f;
 
+			time_string();
+
 	}
 
 	VisualizationPanel::~VisualizationPanel(System::Void){
@@ -159,6 +161,93 @@ namespace OpenGLForm{
 		glEnd();
 		glPopMatrix();
 	}
+
+	System::Void VisualizationPanel::DrawText_FTGL(int n,int x, int y, float scale)
+	{
+		glPushMatrix();
+
+		glTranslatef(x, y-30, 0);
+		glScalef(1.0+scale_x[1],1.0+scale_y[1],1.0+scale_z[1]);	
+	
+		//float font_size = 10*(scale_factor[2]+0.4+scale_x[2]);	
+		font.FaceSize(scale);
+		glColor3f(1.0, 1.0, 1.0);
+		glRasterPos2f(0 , 0 + font.LineHeight());
+		stringstream ss;
+		ss << n;
+		string str = ss.str();
+		char zero[] = "0";
+		if(n<10)
+		{
+			strcat(zero,str.c_str());
+			font.Render(zero);
+		}
+		else
+		{
+			char* text = (char*)str.c_str();
+			font.Render(text);
+		}
+
+		glPopMatrix();
+		
+	}
+
+	System::Void VisualizationPanel::DrawTime_FTGL(int index,int x, int y)
+	{
+		int hour;
+		int five_minute_index;
+		for(int i=0;i<preprocessing_data.hour_range.size();i++)
+		{
+			if(index>=preprocessing_data.hour_range[i].x && index<= preprocessing_data.hour_range[i].y)
+			{
+				hour = preprocessing_data.hour_index[i];
+				if(hour == preprocessing_data.begin_hour && preprocessing_data.num_of_begin_hour<12)
+					five_minute_index = index - preprocessing_data.hour_range[i].x + (12-preprocessing_data.num_of_begin_hour);
+				else
+					five_minute_index = index - preprocessing_data.hour_range[i].x;
+				
+				break;
+			}
+		}
+		stringstream ss;
+		ss << hour;
+		string str = ss.str();
+		char *hour_text = (char*)str.c_str();		
+
+		strcat(hour_text,five_minutes[five_minute_index]);
+
+		glPushMatrix();
+
+		float font_size = 10*(scale_factor[2]+0.8+scale_x[2]);
+		font.FaceSize(font_size);
+		glColor3f(1.0, 1.0, 1.0);
+		glRasterPos2f(x , y-20.0 + font.LineHeight());
+		font.Render(hour_text);
+
+		glPopMatrix();		
+	}
+
+	System::Void VisualizationPanel::DrawCircle(int x, int y, float radius, float r, float g, float b)
+	{
+		int i;
+		int triangleAmount = 30; //# of triangles used to draw circle
+	
+		//GLfloat radius = 0.8f; //radius
+		GLfloat twicePi = 2.0f * 3.14;
+	
+		glBegin(GL_TRIANGLE_FAN);
+			glColor3f(r,g,b);
+			glVertex2f(x, y); // center of circle
+			for(i = 0; i <= triangleAmount;i++)
+			{ 
+				glVertex2f(
+					x + (radius * cos(i *  twicePi / triangleAmount)), 
+					y + (radius * sin(i * twicePi / triangleAmount))
+				);
+			}
+		glEnd();		
+	}
+
 	System::Void VisualizationPanel::SwapOpenGLBuffers(System::Void){
 		SwapBuffers(m_hDC);		
 	}
@@ -170,5 +259,21 @@ namespace OpenGLForm{
 	{
 		int pp = 2;
 		return int(f * pow(10.0, pp) + .5) /  pow(10.0, pp);
+	}
+
+	System::Void VisualizationPanel::time_string()
+	{
+		strcpy(five_minutes[0],":00");
+		strcpy(five_minutes[1],":05");
+		strcpy(five_minutes[2],":10");
+		strcpy(five_minutes[3],":15");
+		strcpy(five_minutes[4],":20");
+		strcpy(five_minutes[5],":25");
+		strcpy(five_minutes[6],":30");
+		strcpy(five_minutes[7],":35");
+		strcpy(five_minutes[8],":40");
+		strcpy(five_minutes[9],":45");
+		strcpy(five_minutes[10],":50");
+		strcpy(five_minutes[11],":55");
 	}
 }

@@ -532,7 +532,7 @@ Mat Preprocessing_Data::set_matrix(vector < vector<float> > raw_data,int attribu
 	handle_mat_raw.release();
 
 	raw_data_mat = handle_mat_raw_transpose.clone();//////////////////////////
-
+	output_mat_as_csv_file_float("raw_data_mat.csv",raw_data_mat);
 
 	Mat normalize_mat = handle_mat_transpose;
 	for(int i=0;i<handle_mat_transpose.cols;i++)
